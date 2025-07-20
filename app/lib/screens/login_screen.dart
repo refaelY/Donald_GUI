@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/custom_button.dart';
 import '../constants/colors.dart';
+import '../screens/registration_screen.dart';
+
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Directionality( // תמיכה בכיוון ימין לשמאל
-      textDirection: TextDirection.rtl,
+    return Directionality( 
+      textDirection: TextDirection.rtl, // תמיכה בכיוון ימין לשמאל
       child: Scaffold(
         backgroundColor: AppColors.background,
         body: SafeArea(
@@ -44,7 +46,15 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   const CustomButton(label: 'אימות'),
                   const SizedBox(height: 32),
-                  const CustomButton(label: 'להרשמה'),
+                  CustomButton(
+                    label: 'להרשמה',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const RegistrationScreen()),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
