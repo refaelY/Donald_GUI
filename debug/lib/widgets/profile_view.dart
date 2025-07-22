@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+  final String userName;
+  const ProfileView({super.key, required this.userName});
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +22,12 @@ class ProfileView extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               color: Colors.white,
             ),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text("עורך דין שמואל מוצפי", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                SizedBox(height: 8),
-                Text("אני עוסק במקצוע מזה 15 שנים\nעם לקוחות מרוצים וכו וכו וכו", textAlign: TextAlign.right),
+                Text(userName, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                const SizedBox(height: 8),
+                const Text("אני עוסק במקצוע מזה 15 שנים\nעם לקוחות מרוצים וכו וכו וכו", textAlign: TextAlign.right),
               ],
             ),
           ),

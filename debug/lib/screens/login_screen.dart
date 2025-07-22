@@ -1,10 +1,12 @@
 // 📁 lib/screens/login_screen.dart
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import '../widgets/custom_text_field.dart';
 import '../widgets/custom_button.dart';
 import '../constants/colors.dart';
 import '../screens/registration_screen.dart';
 import '../screens/manager_screen.dart';
+import '../services/api_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,11 +19,56 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  void _login() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const ManagerScreen()),
-    );
+  bool _isLoading = false;
+
+  final _formKey = GlobalKey<FormState>();
+
+  void _login() async {
+    if (_isLoading) return;
+    if (!_formKey.currentState!.validate()) return;
+    setState(() => _isLoading = true);
+    try {
+      final username = usernameController.text.trim();
+      final password = passwordController.text.trim();
+      // נניח שיש פונקציה loginUser ב-ApiService שמחזירה true/false
+      final success = await ApiService.registerUser(name: username, email: password, age: "20");
+
+      if (!mounted) return;
+
+      if (success) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ManagerScreen(userName: username),
+          ),
+        );
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('שגיאה'),
+            content: const Text('התחברות נכשלה. נסה שוב.'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('אישור'),
+              ),
+            ],
+          ),
+        );
+      }
+    } catch (e) {
+      if (!mounted) return;
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('שגיאה'),
+          content: Text('אירעה שגיאה: $e'),
+        ),
+      );
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
   }
 
   @override
@@ -44,67 +91,123 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Center(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/images/backgrounds/back.png',
-                      height: 200,
-                    ),
-                    const SizedBox(height: 24),
-                    const Text(
-                      'Duck Me',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                child: Form(
+                  key: _formKey,
+                  // Removed autovalidateMode so validation only happens on submit
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/backgrounds/back.png',
+                        height: 200,
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'תמיד כאן, תמיד איתך.',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(height: 32),
-                    CustomTextField(
-                      controller: usernameController,
-                      keyboardType: TextInputType.text,
-                      hintText: 'שם משתמש',
-                    ),
-                    const SizedBox(height: 16),
-                    CustomTextField(
-                      controller: passwordController,
-                      keyboardType: TextInputType.visiblePassword,
-                      isPassword: true,
-                      hintText: 'סיסמה',
-                    ),
-                    const SizedBox(height: 24),
-                    CustomButton(
-                      label: 'התחברות',
-                      onPressed: _login,
-                      color: Color(0xFFF26B3A),
-                    ),
-                    const SizedBox(height: 16),
-                    GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const RegistrationScreen(),
-                        ),
-                      ),
-                      child: const Text(
-                        'לא רשום ה? מעבר להרשמה',
+                      const SizedBox(height: 24),
+                      const Text(
+                        'Duck Me',
                         style: TextStyle(
-                          color: Colors.white,
+                          fontSize: 32,
                           fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.underline,
+                          color: Colors.white,
                         ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 8),
+                      const Text(
+                        'תמיד כאן, תמיד איתך.',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 32),
+                      SizedBox(
+                        height: 80,
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(vertical: 7.5),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.person, color: Colors.blueGrey),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: TextFormField(
+                                  controller: usernameController,
+                                  keyboardType: TextInputType.text,
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'שם משתמש',
+                                    hintStyle: TextStyle(color: Colors.blueGrey),
+                                    alignLabelWithHint: true,
+                                  ),
+                                  validator: (val) => val == null || val.trim().isEmpty ? 'נא למלא שם משתמש' : null,
+                                  textDirection: TextDirection.rtl,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                      SizedBox(
+                        height: 80,
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(vertical: 7.5),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.lock, color: Colors.blueGrey),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: TextFormField(
+                                  controller: passwordController,
+                                  keyboardType: TextInputType.visiblePassword,
+                                  obscureText: true,
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'סיסמה',
+                                    hintStyle: TextStyle(color: Colors.blueGrey),
+                                    alignLabelWithHint: true,
+                                  ),
+                                  validator: (val) => val == null || val.trim().isEmpty ? 'נא למלא סיסמה' : null,
+                                  textDirection: TextDirection.rtl,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      CustomButton(
+                        label: _isLoading ? 'טוען...' : 'התחברות',
+                        onPressed: _isLoading ? null : _login,
+                        color: Color(0xFFF26B3A),
+                      ),
+                      const SizedBox(height: 16),
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RegistrationScreen(),
+                          ),
+                        ),
+                        child: const Text(
+                          'לא רשום ה? מעבר להרשמה',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

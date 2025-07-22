@@ -1,25 +1,44 @@
 // 📁 lib/widgets/chats_view.dart
+
 import 'package:flutter/material.dart';
 import 'chat_card.dart';
+import '../services/api_service.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class ChatsView extends StatelessWidget {
-  const ChatsView({super.key});
+  final String userName;
+  const ChatsView({super.key, required this.userName});
 
   @override
   Widget build(BuildContext context) {
-    final chats = [
-      {"name": "דוד לוי", "time": "13:42", "status": "active"},
-      {"name": "רות ברק", "time": "12:10", "status": "inactive"},
-    ];
-
-    return ListView.builder(
-      itemCount: chats.length,
-      itemBuilder: (context, index) {
-        final chat = chats[index];
-        return ChatCard(
-          name: chat['name']!,
-          time: chat['time']!,
-          status: chat['status']!,
+    return FutureBuilder<http.Response>(
+      future: ApiService.listUsers(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.hasError) {
+          return Center(child: Text('שגיאה בטעינת נתונים'));
+        }
+        final response = snapshot.data;
+        if (response == null || response.statusCode != 200) {
+          return Center(child: Text('לא נמצאו לקוחות'));
+        }
+        final List users = (jsonDecode(response.body) as List);
+        if (users.isEmpty) {
+          return Center(child: Text('אין לקוחות להצגה'));
+        }
+        return ListView.builder(
+          itemCount: users.length,
+          itemBuilder: (context, index) {
+            final client = users[index];
+            return ChatCard(
+              name: client['name'] ?? '',
+              time: '',
+              status: '',
+            );
+          },
         );
       },
     );

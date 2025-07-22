@@ -5,7 +5,8 @@ import '../widgets/clients_view.dart';
 import '../widgets/profile_view.dart';
 
 class ManagerScreen extends StatefulWidget {
-  const ManagerScreen({super.key});
+  final String userName;
+  const ManagerScreen({super.key, required this.userName});
 
   @override
   State<ManagerScreen> createState() => _ManagerScreenState();
@@ -17,11 +18,11 @@ class _ManagerScreenState extends State<ManagerScreen> {
   Widget _buildBody() {
     switch (_selectedIndex) {
       case 0:
-        return const ChatsView();
+        return ChatsView(userName: widget.userName);
       case 1:
-        return const ClientsView();
+        return ClientsView(userName: widget.userName);
       case 2:
-        return const ProfileView();
+        return ProfileView(userName: widget.userName);
       default:
         return const SizedBox();
     }
@@ -60,11 +61,11 @@ class _ManagerScreenState extends State<ManagerScreen> {
               child: Column(
                 children: [
                   if (_selectedIndex == 0)
-                    const Padding(
-                      padding: EdgeInsets.only(top: 18.0, bottom: 4),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 18.0, bottom: 4),
                       child: Text(
-                        'ברוכים הבאים משתמש',
-                        style: TextStyle(
+                        'ברוכים הבאים ${widget.userName}',
+                        style: const TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -132,11 +133,11 @@ class _ManagerScreenState extends State<ManagerScreen> {
                       ),
                     )
                   else
-                    const Padding(
-                      padding: EdgeInsets.only(top: 24.0, bottom: 12),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 24.0, bottom: 12),
                       child: Text(
-                        'המשתמש של ראובן',
-                        style: TextStyle(
+                        'המשתמש של ${widget.userName}',
+                        style: const TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
