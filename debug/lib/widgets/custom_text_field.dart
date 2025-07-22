@@ -6,6 +6,11 @@ class CustomTextField extends StatefulWidget {
   final int maxLines;
   final TextEditingController? controller;
   final TextInputType keyboardType;
+  final String? hintText;
+  final String? errorText;
+  final ValueChanged<String>? onChanged;
+  final bool enabled;
+  final Widget? prefixIcon;
 
   const CustomTextField({
     super.key,
@@ -13,6 +18,11 @@ class CustomTextField extends StatefulWidget {
     this.maxLines = 1,
     this.controller,
     this.keyboardType = TextInputType.text,
+    this.hintText,
+    this.errorText,
+    this.onChanged,
+    this.enabled = true,
+    this.prefixIcon,
   });
 
   @override
@@ -29,16 +39,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
       keyboardType: widget.keyboardType,
       obscureText: widget.isPassword && _obscure,
       maxLines: widget.isPassword ? 1 : widget.maxLines,
+      enabled: widget.enabled,
+      onChanged: widget.onChanged,
       decoration: InputDecoration(
+        hintText: widget.hintText,
+        errorText: widget.errorText,
         filled: true,
         fillColor: Colors.white,
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(color: AppColors.border),
         ),
         focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(color: AppColors.border, width: 2),
         ),
+        prefixIcon: widget.prefixIcon,
         suffixIcon: widget.isPassword
             ? IconButton(
                 icon: Icon(_obscure ? Icons.visibility_off : Icons.visibility),

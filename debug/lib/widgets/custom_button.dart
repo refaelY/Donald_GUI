@@ -4,11 +4,13 @@ import '../constants/colors.dart';
 class CustomButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
+  final Color color;
 
   const CustomButton({
     super.key,
     required this.label,
-    this.onPressed,
+    required this.onPressed,
+    required this.color,
   });
 
   @override
@@ -16,13 +18,15 @@ class CustomButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: onPressed ?? () {},
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
+          backgroundColor: color,
+          foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(vertical: 14),
-          side: BorderSide(color: AppColors.border),
           textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
         ),
         child: Text(label),
       ),
