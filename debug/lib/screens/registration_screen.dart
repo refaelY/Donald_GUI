@@ -2,6 +2,7 @@ import 'package:debug/screens/manager_screen.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import '../services/api_service.dart';
+import '../services/user_provider.dart';
 
 
 class RegistrationScreen extends StatefulWidget {
@@ -82,6 +83,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       if (!mounted) return;
 
       if (response) {
+        // שמירת פרטי המשתמש הגלובליים
+        UserProvider().setUser(UserModel(
+          name: name,
+          email: email,
+          age: '24',
+          about: about,
+        ));
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (_) => ManagerScreen(userName: name)),
@@ -133,7 +141,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       Image.asset('assets/images/backgrounds/back.png', height: 180),
                       const SizedBox(height: 16),
                       const Text(
-                        'Duck Me',
+                        'duck_me',
                         style: TextStyle(fontSize: 32, color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 8),

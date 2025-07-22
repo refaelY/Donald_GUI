@@ -21,39 +21,48 @@ class BottomNav extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.08),
             blurRadius: 8,
-            offset: const Offset(0, -2),
+            offset: const Offset(0, 0),
           ),
         ],
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
-        child: BottomNavigationBar(
-          currentIndex: currentIndex,
-          onTap: onTap,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: const Color(0xFF1B365D),
-          unselectedItemColor: Colors.grey,
-          selectedLabelStyle: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
+        child: Theme(
+          data: Theme.of(context).copyWith(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            canvasColor: Colors.transparent,
           ),
-          unselectedLabelStyle: const TextStyle(fontSize: 13),
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble_outline),
-              label: 'שיחות',
+          child: BottomNavigationBar(
+            currentIndex: currentIndex,
+            onTap: onTap,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: const Color(0xFF1B365D),
+            unselectedItemColor: Colors.grey,
+            selectedLabelStyle: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.people_outline),
-              label: 'הלקוחות',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings_outlined),
-              label: 'הגדרות',
-            ),
-          ],
+            unselectedLabelStyle: const TextStyle(fontSize: 13),
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Center(child: Icon(Icons.chat_bubble_outline)),
+                label: 'שיחות',
+              ),
+              BottomNavigationBarItem(
+                icon: Center(child: Icon(Icons.people_outline)),
+                label: 'הלקוחות',
+              ),
+              BottomNavigationBarItem(
+                icon: Center(child: Icon(Icons.settings_outlined)),
+                label: 'פרופיל',
+              ),
+            ],
+          ),
         ),
       ),
     );

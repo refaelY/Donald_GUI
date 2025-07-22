@@ -7,6 +7,7 @@ import '../constants/colors.dart';
 import '../screens/registration_screen.dart';
 import '../screens/manager_screen.dart';
 import '../services/api_service.dart';
+import '../services/user_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -30,12 +31,19 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       final username = usernameController.text.trim();
       final password = passwordController.text.trim();
-      // נניח שיש פונקציה loginUser ב-ApiService שמחזירה true/false
+      // כאן יש להחליף ל-loginUser אמיתי
       final success = await ApiService.registerUser(name: username, email: password, age: "20");
 
       if (!mounted) return;
 
       if (success) {
+        // שמירת פרטי המשתמש הגלובליים
+        UserProvider().setUser(UserModel(
+          name: username,
+          email: password,
+          age: '20',
+          about: '',
+        ));
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -103,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 24),
                       const Text(
-                        'Duck Me',
+                        'duck_me',
                         style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
@@ -198,7 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         child: const Text(
-                          'לא רשום ה? מעבר להרשמה',
+                          'לא רשומ/ה? מעבר להרשמה',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
