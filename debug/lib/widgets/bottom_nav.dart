@@ -15,13 +15,13 @@ class BottomNav extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFFDF6E3),
+        color: Colors.white.withOpacity(0.85), // Semi-transparent white background
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 8,
-            offset: const Offset(0, 0),
+            color: Colors.black.withOpacity(0.10),
+            blurRadius: 16,
+            offset: const Offset(0, -2),
           ),
         ],
       ),
@@ -50,15 +50,15 @@ class BottomNav extends StatelessWidget {
             showUnselectedLabels: true,
             items: const [
               BottomNavigationBarItem(
-                icon: Center(child: Icon(Icons.chat_bubble_outline)),
+                icon: Icon(Icons.chat_bubble_outline),
                 label: 'שיחות',
               ),
               BottomNavigationBarItem(
-                icon: Center(child: Icon(Icons.people_outline)),
+                icon: Icon(Icons.people_outline),
                 label: 'הלקוחות',
               ),
               BottomNavigationBarItem(
-                icon: Center(child: Icon(Icons.settings_outlined)),
+                icon: Icon(Icons.settings_outlined),
                 label: 'פרופיל',
               ),
             ],

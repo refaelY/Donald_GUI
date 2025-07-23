@@ -165,7 +165,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             gradient: LinearGradient(
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
-              colors: [Color(0xFFF26B3A), Color(0xFF3CA4DC)],
+              colors: [
+                Color.fromARGB(231, 5, 208, 63),
+                Color.fromARGB(222, 0, 153, 255),
+              ],
             ),
           ),
           child: SafeArea(

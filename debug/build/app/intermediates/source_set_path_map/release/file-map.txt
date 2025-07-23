@@ -1,0 +1,12 @@
+com.example.debug.app-jetified-window-java-1.0.0-beta04-0 /Users/refaelyatche/.gradle/caches/8.9/transforms/6784ca76801ed1d0f4dc17816127e1e7/transformed/jetified-window-java-1.0.0-beta04/res
+com.example.debug.app-jetified-window-1.0.0-beta04-1 /Users/refaelyatche/.gradle/caches/8.9/transforms/7294778c9ba3aeb2527a5ef3f6df6679/transformed/jetified-window-1.0.0-beta04/res
+com.example.debug.app-core-1.6.0-2 /Users/refaelyatche/.gradle/caches/8.9/transforms/93cc4488bc82f16202a6e9095ca4e0ad/transformed/core-1.6.0/res
+com.example.debug.app-jetified-annotation-experimental-1.1.0-3 /Users/refaelyatche/.gradle/caches/8.9/transforms/bcefb3f11a919bdb5a5f7d98542baf6d/transformed/jetified-annotation-experimental-1.1.0/res
+com.example.debug.app-main-4 /Users/refaelyatche/DevProjects/donald_gui/debug/android/app/src/main/res
+com.example.debug.app-release-5 /Users/refaelyatche/DevProjects/donald_gui/debug/android/app/src/release/res
+com.example.debug.app-pngs-6 /Users/refaelyatche/DevProjects/donald_gui/debug/build/app/generated/res/pngs/release
+com.example.debug.app-resValues-7 /Users/refaelyatche/DevProjects/donald_gui/debug/build/app/generated/res/resValues/release
+com.example.debug.app-rs-8 /Users/refaelyatche/DevProjects/donald_gui/debug/build/app/generated/res/rs/release
+com.example.debug.app-mergeReleaseResources-9 /Users/refaelyatche/DevProjects/donald_gui/debug/build/app/intermediates/incremental/release/mergeReleaseResources/merged.dir
+com.example.debug.app-mergeReleaseResources-10 /Users/refaelyatche/DevProjects/donald_gui/debug/build/app/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+com.example.debug.app-merged_res-11 /Users/refaelyatche/DevProjects/donald_gui/debug/build/app/intermediates/merged_res/release

@@ -52,7 +52,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 22,
+                  fontSize: 33,
                   shadows: [
                     Shadow(
                       color: Colors.black26,
@@ -65,11 +65,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             flexibleSpace: Container(
               decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                  colors: [Color(0xFFF26B3A), Color(0xFF3CA4DC)],
-                ),
+                
               ),
             ),
           ),
@@ -81,7 +77,10 @@ class _ChatScreenState extends State<ChatScreen> {
                 gradient: LinearGradient(
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
-                  colors: [Color(0xFFF26B3A), Color(0xFF3CA4DC)],
+                  colors: [
+                Color.fromARGB(231, 5, 208, 63),
+                Color.fromARGB(222, 0, 153, 255),
+              ],
                 ),
               ),
             ),

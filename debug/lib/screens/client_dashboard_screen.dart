@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/chats_view.dart';
 import '../widgets/profile_view.dart';
 import '../screens/manager_dashboard_screen.dart';
+import '../widgets/bottom_nav.dart';
 
 class ClientDashboardScreen extends StatefulWidget {
   final String userName;
@@ -28,7 +29,7 @@ class _ClientDashboardScreenState extends State<ClientDashboardScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 18.0, bottom: 2),
               child: Align(
-                alignment: Alignment.topRight,
+                alignment: Alignment.center,
                 child: Text(
                   'ברוך הבא ${widget.userName}',
                   style: const TextStyle(
@@ -177,44 +178,29 @@ class _ClientDashboardScreenState extends State<ClientDashboardScreen> {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
-      child: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-                colors: [Color(0xFFF26B3A), Color(0xFF3CA4DC)],
-              ),
-            ),
-          ),
-          Scaffold(
-            backgroundColor: Colors.transparent,
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-            ),
-            body: _buildBody(),
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: _selectedIndex,
-              onTap: _onItemTapped,
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.chat),
-                  label: 'שיחות אחרונות',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.add),
-                  label: 'הוספה',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  label: 'סטטוס',
-                ),
+      child: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+            colors: [
+                Color.fromARGB(231, 5, 208, 63),
+                Color.fromARGB(222, 0, 153, 255),
               ],
-            ),
           ),
-        ],
+        ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+          ),
+          body: _buildBody(),
+          bottomNavigationBar: BottomNav(
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+          ),
+        ),
       ),
     );
   }
