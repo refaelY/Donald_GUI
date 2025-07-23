@@ -5,7 +5,7 @@ import '../widgets/custom_text_field.dart';
 import '../widgets/custom_button.dart';
 import '../constants/colors.dart';
 import '../screens/registration_screen.dart';
-import '../screens/manager_screen.dart';
+import '../screens/manager_dashboard_screen.dart';
 import '../services/api_service.dart';
 import '../services/user_provider.dart';
 
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => ManagerScreen(userName: username),
+            builder: (context) => ManagerDashboardScreen(userName: username),
           ),
         );
       } else {
@@ -130,8 +130,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: 80,
                         child: Container(
-                          margin: const EdgeInsets.symmetric(vertical: 7.5),
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          margin: const EdgeInsets.symmetric(vertical: 3),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(20),
@@ -139,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Row(
                             children: [
                               const Icon(Icons.person, color: Colors.blueGrey),
-                              const SizedBox(width: 12),
+                              const SizedBox(width: 8),
                               Expanded(
                                 child: TextFormField(
                                   controller: usernameController,
@@ -158,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 15),
+                      const SizedBox(height: 6),
                       SizedBox(
                         height: 80,
                         child: Container(
@@ -199,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 16),
                       GestureDetector(
-                        onTap: () => Navigator.push(
+                        onTap: () => Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                             builder: (context) => const RegistrationScreen(),

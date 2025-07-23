@@ -4,7 +4,7 @@
             "outputFile": "com.example.debug.app-mergeReleaseResources-9:/values-es-rUS/values-es-rUS.xml",
             "map": [
                 {
-                    "source": "/Users/refaelyatche/.gradle/caches/transforms-3/7e9df2ac2213a6bd3cef0f2f27870d79/transformed/core-1.6.0/res/values-es-rUS/values-es-rUS.xml",
+                    "source": "/Users/refaelyatche/.gradle/caches/8.9/transforms/93cc4488bc82f16202a6e9095ca4e0ad/transformed/core-1.6.0/res/values-es-rUS/values-es-rUS.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

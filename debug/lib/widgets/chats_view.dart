@@ -1,6 +1,7 @@
 // 📁 lib/widgets/chats_view.dart
 
 import 'package:flutter/material.dart';
+import '../screens/chat_screen.dart';
 import 'chat_card.dart';
 import '../services/api_service.dart';
 import 'dart:convert';
@@ -33,10 +34,20 @@ class ChatsView extends StatelessWidget {
           itemCount: users.length,
           itemBuilder: (context, index) {
             final client = users[index];
-            return ChatCard(
-              name: client['name'] ?? '',
-              time: '',
-              status: '',
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ChatScreen(currentUser: userName, otherUser: client['name']),
+                  ),
+                );
+              },
+              child: ChatCard(
+                name: client['name'] ?? '',
+                time: '',
+                status: '',
+              ),
             );
           },
         );

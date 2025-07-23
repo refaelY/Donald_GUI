@@ -1,0 +1,185 @@
+@startuml
+
+left to right direction
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+
+package "Client App" {
+
+  class MainApp {
+    +loginScreen: LoginScreen
+    +registrationScreen: RegistrationScreen
+  }
+
+  rectangle "Authentication" as Auth {
+    class RegistrationScreen {
+      +submitForm(name, email, phone, about)
+    }
+
+    class LoginScreen {
+      +submitLogin(email, password)
+    }
+  }
+
+  rectangle "Dashboard" as Role {
+    class ManagerDashboardScreen {
+      +showClientsList()
+      +editDetails()
+      +changeClientIcon()
+    }
+
+    class ClientDashboardScreen {
+      +viewChats()
+      +editDetails()
+      +createCommunity()
+    }
+  }
+
+
+  rectangle "Communication Layer" as Comm {
+    class User {
+      -user_name: String
+      -user_email: String
+      -user_details: String
+      -user_icon: String
+      -user_id: int
+    }
+    class Chat {
+      -sender_id: int
+      -receiver_id: int
+      -message: String
+      -timestamp: DateTime
+    }
+    class group {
+      -name: String
+      -manager_id: int
+      -members: List<User>
+      -messages: List<Chat>
+      +sendMessage(message: String)
+
+    }
+    class ApiService {
+      -client_list: List<User>
+      -chats: List<Chat>
+      -groups: List<group>
+      +loginUser()
+      +registerUser()
+      +editUserDetails()
+      +changeUserIcon()
+      +getClientsByManagerId()
+      +getUserChats()
+      +createCommunity()
+      +getStatus()
+      +sendMessage()
+      +echoMessage()
+      +calculate()
+      +searchUsers()
+      +getRandomData()
+    }
+  }
+
+  ' High-level arrows only between rectangles
+  Auth --> Comm
+  Role --> Comm  
+  MainApp --> Auth
+  MainApp --> Role
+
+}
+
+package "Server API" {
+  class Server {
+    +/users/ (POST, GET)
+    +/users/{id} (GET, DELETE, PUT)
+    +/users/{id}/icon (PUT)
+    +/users?manager_id= (GET)
+    +/demo/message (POST)
+    +/demo/calculator (POST)
+    +/demo/search (POST)
+    +/demo/random (GET)
+    +/echo (POST)
+    +/status (GET)
+    +/community (POST)
+    +/chats (GET, POST)
+  }
+
+  class Database {
+    +Users(id, name, email, age, role [client/manager], manager_id, icon_url)
+    +Chats(id, sender_id, receiver_id, timestamp, message)
+    +Groups(id, name, created_by, members)
+  }
+}
+
+Comm --> Server
+Server --> Database
+
+' --- Payloads ---
+
+package "Payload Examples" {
+  class Login {
+    - email: String
+    - password: String
+  }
+
+  class Register {
+    - name: String
+    - email: String
+    - password: String
+    - age: int
+    - role: int
+    - phone: String
+    - about: String
+  }
+
+  class ChatMessage {
+    - sender_id: int
+    - receiver_id: int
+    - message: String
+    - timestamp: DateTime
+  }
+  class CreateGroup {
+    - name: String
+    - manager_id: int
+    - members: List<int>
+  }
+  class Status {
+    - status: String
+  }
+
+  class EditUser {
+    - user_id: int
+    - name: String
+    - email: String
+    - age: int
+    - phone: String
+    - about: String
+  }
+
+  class IconUpdate{
+    - user_id: int
+    - icon_url: String
+  }
+
+  class Group {
+    - name: String
+    - created_by: int
+    - members: List<int>
+  }
+
+  class Echo {
+    - message: String
+  }
+
+  class Message {
+    - text: String
+    - language: String
+    - urgent: bool
+  }
+
+  class UserSearch {
+    - name: String
+    - min_age: int
+    - max_age: int
+  }
+}
+
+@enduml

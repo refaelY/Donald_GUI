@@ -1,6 +1,7 @@
-import 'package:debug/screens/manager_screen.dart';
+import '../screens/manager_dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
+import 'client_dashboard_screen.dart';
 import '../services/api_service.dart';
 import '../services/user_provider.dart';
 
@@ -12,13 +13,17 @@ class RegistrationScreen extends StatefulWidget {
   State<RegistrationScreen> createState() => _RegistrationScreenState();
 }
 
+
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   final phoneController = TextEditingController();
   final aboutController = TextEditingController();
 
   bool _isLoading = false;
+  bool _obscurePassword = true;
+  int? _role; // 0 = משתמש, 1 = נותן שירות
 
   final _formKey = GlobalKey<FormState>();
 
@@ -29,12 +34,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     int maxLines = 1,
     String? Function(String?)? validator,
     TextInputType? keyboardType,
+    bool isPassword = false,
   }) {
     return SizedBox(
-      height: maxLines > 1 ? 110 : 80,
+      height: maxLines > 1 ? 110 : 62,
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 14),
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        margin: const EdgeInsets.symmetric(vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -42,11 +48,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         child: Row(
           children: [
             Icon(icon, color: Colors.blueGrey),
-            const SizedBox(width: 12),
+            const SizedBox(width: 8),
             Expanded(
               child: TextFormField(
                 controller: controller,
-                maxLines: maxLines,
+                minLines: maxLines > 1 ? 3 : 1,
+                maxLines: maxLines > 1 ? 3 : 1,
+                obscureText: isPassword ? _obscurePassword : false,
                 keyboardType: keyboardType,
                 validator: validator,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -55,6 +63,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   hintText: hint,
                   hintStyle: const TextStyle(color: Colors.blueGrey),
                   alignLabelWithHint: true,
+                  suffixIcon: isPassword
+                      ? IconButton(
+                          icon: Icon(_obscurePassword ? Icons.visibility : Icons.visibility_off),
+                          onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                        )
+                      : null,
                 ),
                 textDirection: TextDirection.rtl,
               ),
@@ -67,17 +81,32 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   Future<void> _register() async {
     if (!_formKey.currentState!.validate()) return;
+    if (_role == null) {
+      showDialog(
+        context: context,
+        builder: (_) => const AlertDialog(
+          title: Text('שגיאה'),
+          content: Text('יש לבחור סוג משתמש'),
+        ),
+      );
+      return;
+    }
     setState(() => _isLoading = true);
     try {
       final name = nameController.text.trim();
       final email = emailController.text.trim();
+      final password = passwordController.text.trim();
       final phone = phoneController.text.trim();
       final about = aboutController.text.trim();
 
+      // כאן יש להוסיף קריאה ל-ApiService.registerUser עם כל הפרמטרים
+      // כרגע אין תמיכה בסיסמא ותפקיד ב-ApiService, יש להוסיף בשרת
       final response = await ApiService.registerUser(
         name: name,
         email: email,
         age: "24", // גיל קבוע
+        // password: password,
+        // role: _role,
       );
 
       if (!mounted) return;
@@ -90,10 +119,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           age: '24',
           about: about,
         ));
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => ManagerScreen(userName: name)),
-        );
+        if (_role == 0) {
+          // לקוח
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => ClientDashboardScreen(userName: name)),
+          );
+        } else {
+          // נותן שירות
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => ManagerDashboardScreen(userName: name)),
+          );
+        }
       } else {
         showDialog(
           context: context,
@@ -151,6 +189,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ),
                       const SizedBox(height: 24),
 
+
                       buildTextField(
                         icon: Icons.person,
                         hint: 'שם מלא',
@@ -168,8 +207,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           return null;
                         },
                       ),
+                      // שדה סיסמה
                       buildTextField(
                         icon: Icons.lock,
+                        hint: 'סיסמה',
+                        controller: passwordController,
+                        isPassword: true,
+                        validator: (val) {
+                          if (val == null || val.trim().isEmpty) return 'נא למלא סיסמה';
+                          if (val.trim().length < 6) return 'סיסמה קצרה מדי';
+                          return null;
+                        },
+                      ),
+                      buildTextField(
+                        icon: Icons.phone,
                         hint: 'מספר פלאפון',
                         controller: phoneController,
                         keyboardType: TextInputType.phone,
@@ -185,6 +236,29 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         controller: aboutController,
                         maxLines: 3,
                         validator: (val) => val == null || val.trim().isEmpty ? 'נא למלא קצת עליך' : null,
+                      ),
+
+                      // בחירת סוג משתמש
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Radio<int>(
+                              value: 0,
+                              groupValue: _role,
+                              onChanged: (val) => setState(() => _role = val),
+                            ),
+                            const Text('משתמש'),
+                            const SizedBox(width: 24),
+                            Radio<int>(
+                              value: 1,
+                              groupValue: _role,
+                              onChanged: (val) => setState(() => _role = val),
+                            ),
+                            const Text('נותן שירות'),
+                          ],
+                        ),
                       ),
 
                       const SizedBox(height: 24),
@@ -208,7 +282,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ),
                       const SizedBox(height: 24),
                       GestureDetector(
-                        onTap: () => Navigator.push(
+                        onTap: () => Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (_) => const LoginScreen()),
                         ),
