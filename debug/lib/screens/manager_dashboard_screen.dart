@@ -66,7 +66,7 @@ class _ManagerDashboardScreenState extends State<ManagerDashboardScreen> {
                       child: Text(
                         'ברוכים הבאים ${widget.userName}',
                         style: const TextStyle(
-                          fontSize: 22,
+                          fontSize: 39,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                           shadows: [
@@ -134,11 +134,11 @@ class _ManagerDashboardScreenState extends State<ManagerDashboardScreen> {
                     )
                   else
                     Padding(
-                      padding: const EdgeInsets.only(top: 24.0, bottom: 12),
+                      padding: const EdgeInsets.only(top: 18.0, bottom: 12),
                       child: Text(
                         'המשתמש של ${widget.userName}',
                         style: const TextStyle(
-                          fontSize: 28,
+                          fontSize: 39,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),

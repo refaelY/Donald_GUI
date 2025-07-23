@@ -26,13 +26,13 @@ class _ClientDashboardScreenState extends State<ClientDashboardScreen> {
         return Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 0.0, bottom: 2),
+              padding: const EdgeInsets.only(top: 18.0, bottom: 2),
               child: Align(
                 alignment: Alignment.topRight,
                 child: Text(
                   'ברוך הבא ${widget.userName}',
                   style: const TextStyle(
-                    fontSize: 22,
+                    fontSize: 39,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                     shadows: [
@@ -107,11 +107,11 @@ class _ClientDashboardScreenState extends State<ClientDashboardScreen> {
         return Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 24.0, bottom: 12),
+              padding: const EdgeInsets.only(top: 18.0, bottom: 12),
               child: Text(
                 'המשתמש של ${widget.userName}',
                 style: const TextStyle(
-                  fontSize: 28,
+                  fontSize: 39,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),

@@ -1,4 +1,0 @@
-#Wed Jul 23 18:08:26 IDT 2025
-base.0=/Users/refaelyatche/DevProjects/donald_gui/debug/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex

@@ -12,6 +12,9 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: 'Donald GUI',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'Rubik',
+      ),
       initialRoute: '/login',
       routes: {
         '/login': (context) => const LoginScreen(),

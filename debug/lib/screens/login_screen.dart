@@ -109,11 +109,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         'assets/images/backgrounds/back.png',
                         height: 200,
                       ),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 0),
                       const Text(
-                        'duck_me',
+                        'Duck me',
                         style: TextStyle(
-                          fontSize: 32,
+                          fontSize: 52,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
@@ -126,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: Colors.white,
                         ),
                       ),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 42),
                       SizedBox(
                         height: 80,
                         child: Container(
@@ -195,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       CustomButton(
                         label: _isLoading ? 'טוען...' : 'התחברות',
                         onPressed: _isLoading ? null : _login,
-                        color: Color(0xFFF26B3A),
+                        color: Color.fromARGB(255, 242, 70, 58),
                       ),
                       const SizedBox(height: 16),
                       GestureDetector(
@@ -206,7 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         child: const Text(
-                          'לא רשומ/ה? מעבר להרשמה',
+                          'לא רשום? מעבר להרשמה',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

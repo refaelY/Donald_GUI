@@ -10,19 +10,35 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		PTZ8duekf0W1oMEDwj9K/TkWUUo=
+		Q9B0d0oo7dvbptZF/x/DNqSLLxA=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		0RMepYGmyN1xe8f6n3/bhwOin48=
+		L7Filp+riKEcSrooMRy8aO8JasY=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
-		vKJkVIcw+LGHFnKJGwrQwCREv68=
+		aStUj1VUF7ftIBSfgX7jBIV0iFE=
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
 		1A0l/oUCkICVcXVnkY4Cg9Q2658=
+		</data>
+		<key>flutter_assets/assets/fonts/Rubik/Rubik-Bold.ttf</key>
+		<data>
+		Sq1SQ87gR0abgPlqknFPLohBh4U=
+		</data>
+		<key>flutter_assets/assets/fonts/Rubik/Rubik-BoldItalic.ttf</key>
+		<data>
+		vhppeZbE55ltcRjRmdcWnDJ7GyQ=
+		</data>
+		<key>flutter_assets/assets/fonts/Rubik/Rubik-Italic.ttf</key>
+		<data>
+		8ViCZyQYmzDQwk64PEwK0Cc1nQ8=
+		</data>
+		<key>flutter_assets/assets/fonts/Rubik/Rubik-Regular.ttf</key>
+		<data>
+		ASR6fqXcsp4o1fufb+s+tyobw7I=
 		</data>
 		<key>flutter_assets/assets/images/backgrounds/back.png</key>
 		<data>
@@ -30,7 +46,7 @@
 		</data>
 		<key>flutter_assets/assets/images/logo/logo.png</key>
 		<data>
-		vw5x+PpDdtZq9sHEKKi1/EFo0Hs=
+		HUCSlvK95GvJhUGxmpNlK3+vXdw=
 		</data>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
@@ -51,21 +67,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			9L56rFD/JbRtU2vTWixYKPoxdo5rhyPS7kBf9osD0vQ=
+			BPsYishOKxkKj69fnZeViAKtDrZDCeW8QOVK5YawOZo=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Sub/cjK0OR2SdRQOctqUJ1kHzjCfM37wYdOoY9AXZV8=
+			9L0HpubmP3s0CFTn8bjBLJitoOD86iarOJfOhwy6dHw=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			zX4DZFvESy3Ue3y2JvUcTsv1Whl6t3JBYotHrBZfviE=
+			pwuX3nC94N2Q1CkVfSfaawsxacq831vJPG8FR4lld7U=
 			</data>
 		</dict>
 		<key>flutter_assets/NOTICES.Z</key>
@@ -73,6 +89,34 @@
 			<key>hash2</key>
 			<data>
 			jb9AcrJWm/FbHWPWJNYAXfOtMEP8qS9RhM7Yn9+p+zU=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Rubik/Rubik-Bold.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			XzKQGu0TcsNMNZcJ/xO8/ft4c12p37T2/QLe1Oacqu4=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Rubik/Rubik-BoldItalic.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			tplAA17OOX2b12id2jutbMR5G21G5kC0VJGyhbPuL4w=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Rubik/Rubik-Italic.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			RclAuOO0qOt8/aRW4wJ/Py4vUalDXp6A/Z++NP+QQZs=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/fonts/Rubik/Rubik-Regular.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			+x5IcUpRN9oywKrNEUU8jBV3O6hZwcNtvlTWkNHu91A=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/images/backgrounds/back.png</key>
@@ -86,7 +130,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3b5727PpQNcvN24BAuBQunA37xp8mJSyUdZ2EWK1qeE=
+			YwG9q2aadH+DYKeclBrjCXjgCaDJxiFJ7DRf6+OY17o=
 			</data>
 		</dict>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>

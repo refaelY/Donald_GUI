@@ -177,17 +177,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   child: Column(
                     children: [
                       Image.asset('assets/images/backgrounds/back.png', height: 180),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 0),
                       const Text(
-                        'duck_me',
-                        style: TextStyle(fontSize: 32, color: Colors.white, fontWeight: FontWeight.bold),
+                        'Duck me',
+                        style: TextStyle(fontSize: 39, color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 8),
                       const Text(
                         'הצטרף אלינו - מר מאן שבילך!',
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 40),
 
 
                       buildTextField(
@@ -266,7 +266,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFFF26B3A),
+                            backgroundColor: Color.fromARGB(255, 242, 70, 58),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                             padding: const EdgeInsets.symmetric(vertical: 16),
                           ),
